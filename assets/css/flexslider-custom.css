@@ -1,0 +1,25 @@
+/* Direction Nav */
+.flexslider .slides > li { position: relative; }
+.flex-direction-nav a:before  { 
+	font-family:'fontello'; 
+	content: '\e0CD';
+	line-height: 40px; 
+}
+.flex-direction-nav a.flex-next:before  { content: '\e0CC'; }
+.flex-caption {
+	width:100%;
+	padding:2%;
+	position:absolute;
+	left:0;
+	bottom:0;
+	background:rgba(0,0,0,0.6);
+	color:#fff;
+	text-align:center;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.3);
+	font-size:14px;
+	line-height:18px; 
+	margin-bottom:0;
+}
+
+/* Single Post slider */
+#post-slider { margin-bottom: 30px; }
