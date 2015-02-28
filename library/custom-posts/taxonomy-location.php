@@ -3,7 +3,7 @@ add_action('init', 'sp_location_init', 0);
 function sp_location_init() {
 	register_taxonomy(
 		'sp_location',
-		array( 'sp_job' ),
+		array( 'sp_job', 'sp_listing' ),
 		array(
 			'hierarchical' => true,
 			'labels' => array(

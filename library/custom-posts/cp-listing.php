@@ -122,7 +122,7 @@
 			switch ( $column ) {
 				
 				case "listing_town":
-					the_terms( $post->ID, 'sp_city' );
+					the_terms( $post->ID, 'sp_location' );
 					break;
 
 				case "address":
