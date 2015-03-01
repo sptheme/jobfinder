@@ -9,11 +9,13 @@
 //Custom post WordPress admin menu position - 30, 33, 39, 42, 45, 48
 if ( ! isset( $cp_menu_position ) )
 	$cp_menu_position = array(
-			'menu_job'       => 30,
-            'menu_listing'   => 33
+			//'menu_slideshow' => 30,
+            'menu_job'       => 33,
+            'menu_listing'   => 39
 		);
 
 //All custom posts
+//load_template( SP_BASE_DIR . '/library/custom-posts/cp-slideshow.php' );
 load_template( SP_BASE_DIR . '/library/custom-posts/cp-job.php' );
 load_template( SP_BASE_DIR . '/library/custom-posts/cp-listing.php' );
 

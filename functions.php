@@ -54,7 +54,7 @@ load_template( SP_BASE_DIR . '/library/functions/aq_resizer.php'); // small func
  * ----------------------------------------------------------------------------------------
  */
 if ( ! isset( $content_width ) )
-	$content_width = 640;
+	$content_width = 940;
 	
 /**
  * ----------------------------------------------------------------------------------------
@@ -83,6 +83,7 @@ if( !function_exists('sp_theme_setup') ) {
 
 		/* Add custom thumbnail sizes: base size 1280x768, 960x576, 940x564, 640x384, 320x192 */
 		set_post_thumbnail_size( 320, 192, true );
+		add_image_size( 'post-gallery', 940, 500, true  );
 
 		/* And HTML5 support */
 		add_theme_support( 'html5' );

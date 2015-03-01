@@ -555,3 +555,54 @@ if ( !function_exists('sp_get_posttype_related') ) {
 	}
 
 }
+
+/**
+ * ----------------------------------------------------------------------------------------
+ * Render HTML Meta Slideshow in Home template
+ * ----------------------------------------------------------------------------------------
+ *
+ * @return 	string
+ *
+ */
+
+if ( ! function_exists( 'sp_get_meta_slideshow' ) ) {
+	function sp_get_meta_slideshow( $meta_slide = array(), $effect = 'fade' ) {
+		global $post;
+
+		?>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function($){
+				$("#home-slider").flexslider({
+					animation: "<?php echo $effect; ?>",
+					slideshowSpeed: 5000,
+					animationDuration: 200,
+					animationLoop: true,
+					pauseOnAction: true,
+					pauseOnHover: true,
+					smoothHeight: false,
+					controlNav: true
+				});
+			});		
+		</script>
+		
+		<?php
+	    $out = '<div id="home-slider" class="flexslider">';
+	    $out .= '<ul class="slides">';
+	    foreach ($meta_slide as $image ) :  
+	        
+	        $images = sp_get_post_attachment( $image );
+	        $image_url = aq_resize( $images['src'], '940', '420', true);
+
+	        $out .= '<li>';
+	        $out .= '<img src="' . $image_url . '">';
+	        $out .= '</li>';
+	    endforeach;
+	    wp_reset_postdata();
+
+	    $out .= '</ul>';
+	    $out .= '</div>';
+
+		return $out;	
+	}
+}

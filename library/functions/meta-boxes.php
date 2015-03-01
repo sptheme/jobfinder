@@ -260,12 +260,80 @@ $post_type_listing = array(
 	)
 );
 
+/* ---------------------------------------------------------------------- */
+/*	Meta box for Home template
+/* ---------------------------------------------------------------------- */
+$homepage_template = array(
+	'id'          => 'slideshow-settings',
+	'title'       => 'Slideshow settings',
+	'desc'        => 'Upload photos to show as slideshow',
+	'pages'       => array( 'page' ),
+	'context'     => 'normal',
+	'priority'    => 'high',
+	'fields'      => array(
+		array(
+			'label'		=> 'Upload photo',
+			'id'		=> $prefix . 'page_gallery',
+			'type'		=> 'gallery',
+			'desc'		=> 'Upload photos'
+		),
+		array(
+			'label'		=> 'Slide Effect',
+			'id'		=> $prefix . 'slide_effect',
+			'type'		=> 'select',
+			'std'		=> '',
+			'desc'		=> '',
+			'choices'     => array( 
+	          array(
+	            'value'       => 'fade',
+	            'label'       => 'Fade',
+	            'src'         => ''
+	          ),
+	          array(
+	            'value'       => 'slide',
+	            'label'       => 'Slide',
+	            'src'         => ''
+	          )
+	        )
+		),
+	)
+);
 
 
+/* ---------------------------------------------------------------------- */
+/*	Return meta box option base on page template selected
+/* ---------------------------------------------------------------------- */
+function rw_maybe_include() {
+	// Include in back-end only
+	if ( ! defined( 'WP_ADMIN' ) || ! WP_ADMIN ) {
+		return false;
+	}
+
+	// Always include for ajax
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		return true;
+	}
+
+	if ( isset( $_GET['post'] ) ) {
+		$post_id = $_GET['post'];
+	}
+	elseif ( isset( $_POST['post_ID'] ) ) {
+		$post_id = $_POST['post_ID'];
+	}
+	else {
+		$post_id = false;
+	}
+
+	$post_id = (int) $post_id;
+	$post    = get_post( $post_id );
+
+	$template = get_post_meta( $post_id, '_wp_page_template', true );
+
+	return $template;
+}
 
 /*  Register meta boxes
 /* ------------------------------------ */
-	ot_register_meta_box( $page_layout_options );
 	ot_register_meta_box( $post_format_audio );
 	ot_register_meta_box( $post_format_chat );
 	ot_register_meta_box( $post_format_gallery );
@@ -274,4 +342,11 @@ $post_type_listing = array(
 	ot_register_meta_box( $post_format_video );
 	ot_register_meta_box( $post_type_listing );
 	ot_register_meta_box( $post_type_job );
+
+	$template_file = rw_maybe_include();
+	if ( $template_file == 'templates/template-home.php' ) {
+		ot_register_meta_box( $homepage_template ); 
+	} else {
+		ot_register_meta_box( $page_layout_options );
+	}
 }

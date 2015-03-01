@@ -1,6 +1,6 @@
 /* only in content editor page */
 html .mceContentBody {
-	max-width: 640px;
+	max-width: 940px;
 	/*font-size: 75%;*/ /* Browser default = 16px, Hence, 16*75/100 = 12px (base font size) */
 }
 /* end only in content editor page */
