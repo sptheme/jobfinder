@@ -549,9 +549,43 @@ if ( !function_exists('sp_get_posttype_related') ) {
 		  'posts_per_page' => -1,
 		  'post_status'    =>   'publish',
 		));
-		$query = new WP_Query($args);
+		$custom_query = new WP_Query($args);
 
-		return $query;
+		return $custom_query;
+	}
+
+}
+
+/**
+ * ----------------------------------------------------------------------------------------
+ * Get Sticky Job post
+ * ----------------------------------------------------------------------------------------
+ */
+if ( !function_exists('sp_get_post_job') ) {
+
+	function sp_get_post_job( $post_num ) {
+
+		$sticky = get_option( 'sticky_posts' );
+		$args = array(
+			'post_type'				=> 'sp_job',
+			'posts_per_page'		=> $post_num,
+			'post_status'   		=> 'publish',
+			'meta_key'				=> 'sp_is_urgent',
+			'meta_value' 			=> 'on',
+		);
+		$custom_query = new WP_Query($args);
+
+		$out = '';
+
+		if( $custom_query->have_posts() ) :
+			$out .= '<div class="urgent-job">';
+			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+			 $out .= get_template_part( 'templates/posts/job-item' );
+			endwhile; wp_reset_postdata();
+			$out .= '</div>';
+		endif;
+
+		return $out;
 	}
 
 }

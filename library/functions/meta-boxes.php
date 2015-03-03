@@ -196,6 +196,13 @@ $post_type_job = array(
 	'priority'    => 'high',
 	'fields'      => array(
 		array(
+			'label'		=> 'Is urgent job',
+			'id'		=> $prefix . 'is_urgent',
+			'type'		=> 'on-off',
+			'std'		=> 'off',
+			'desc'		=> 'Switch urgent job on/off'
+		),
+		array(
 			'label'		=> 'Company/Orgainzation',
 			'id'		=> $prefix . 'company',
 			'type'		=> 'custom-post-type-select',

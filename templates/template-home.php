@@ -22,8 +22,7 @@ Template Name: Home
 
 	<?php do_action( 'sp_start_content_wrap_html' ); ?>
 		<div class="main">
-	<!-- Start Welcome message or slogan -->
-	<div id="welcome-section">	
+	
 	<?php
 		// Start welcome message
 		while ( have_posts() ) : the_post(); ?>
@@ -31,9 +30,8 @@ Template Name: Home
 			<?php the_content(); ?>
 			
 	<?php endwhile; ?>
-	</div> <!-- .welcome -->
 
-	</div><!-- #main -->
+		</div><!-- #main -->
 	<?php get_sidebar();?>
 	<?php do_action( 'sp_end_content_wrap_html' ); ?>	
 
