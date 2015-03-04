@@ -17,6 +17,7 @@ function sp_shortcodes_register_mce_button_3( $buttons ) {
 	array_push( $buttons, 'accordion' );
 	array_push( $buttons, 'toggle' );
 	array_push( $buttons, 'tab' );
+	array_push( $buttons, 'job' );
 
     return $buttons;
 }
@@ -57,6 +58,7 @@ function sp_shortcodes_add_tinymce_plugin($plugin_array) {
 	$plugin_array['accordion']		= ED_JS_URL . 'ed-accordion.js';
 	$plugin_array['toggle']			= ED_JS_URL . 'ed-toggle.js';
 	$plugin_array['tab']			= ED_JS_URL . 'ed-tab.js';
+	$plugin_array['job']			= ED_JS_URL . 'ed-job.js';
 	
     return $plugin_array;
 }

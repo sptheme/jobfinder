@@ -35,7 +35,7 @@ function sp_add_shortcodes() {
 	add_shortcode( 'toggle_section', 'sp_toggle_section_shortcode' );	
 	add_shortcode( 'tabgroup', 'sp_tabgroup_shortcode' );
 	add_shortcode( 'tab', 'sp_tab_shortcode' );
-	add_shortcode( 'urgent_job', 'sp_urgent_job_sc' );
+	add_shortcode( 'job', 'sp_job_sc' );
 	
 }
 add_action( 'init', 'sp_add_shortcodes' );
@@ -228,12 +228,13 @@ function sp_tab_shortcode($atts, $content = null) {
 	
 }
 
-function sp_urgent_job_sc( $atts, $content = null ) {
+function sp_job_sc( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-		'$post_num' => null,		
+		'post_num' => null,		
 	), $atts));
 
 	$out = sp_get_post_job( $post_num );
+
 	return $out;
 }
 

@@ -565,7 +565,6 @@ if ( !function_exists('sp_get_post_job') ) {
 
 	function sp_get_post_job( $post_num ) {
 
-		$sticky = get_option( 'sticky_posts' );
 		$args = array(
 			'post_type'				=> 'sp_job',
 			'posts_per_page'		=> $post_num,
@@ -578,16 +577,80 @@ if ( !function_exists('sp_get_post_job') ) {
 		$out = '';
 
 		if( $custom_query->have_posts() ) :
-			$out .= '<div class="urgent-job">';
+			//$out .= '<div class="urgent-job">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
-			 $out .= get_template_part( 'templates/posts/job-item' );
+			 	$out .= sp_job_item_html( get_the_ID() );
 			endwhile; wp_reset_postdata();
-			$out .= '</div>';
+			//$out .= '</div>';
 		endif;
 
 		return $out;
 	}
 
+}
+
+/**
+ * ----------------------------------------------------------------------------------------
+ * Render HTML Job item
+ * ----------------------------------------------------------------------------------------
+ *
+ * @return 	string
+ *
+ */
+
+if ( ! function_exists( 'sp_job_item_html' ) ) {
+	function sp_job_item_html( $post_id ) {
+		
+		$out =  '<article id="post-' . $post_id . '" class="job-item">';	
+		
+		$out .= '<div class="two-third">';
+		$out .= '<h3><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+		$out .= '<div class="entry-meta">';
+		$out .= '<div class="two-fourth">';
+		$out .= get_the_term_list( $post_id, 'sp_category', '<span class="attr">Category:</span> ', ', ' );
+		$out .= '</div>';
+		$out .= '<div class="two-fourth last">';
+		$out .= get_the_term_list( $post_id, 'sp_industry', '<span class="attr">Industry:</span> ', ', ' );
+		$out .= '</div>';
+		$out .= '</div> <!-- .entry-meta -->';
+		$out .= '</div> <!-- .two-third -->';
+
+		$out .= '<div class="one-third last">';
+		$out .= '<div class="job-location two-fourth">';
+		$out .= sp_get_term_name_by_id( get_post_meta( $post_id, 'sp_job_location', true ), 'sp_location' );
+		$out .= '</div>';
+		$out .= '<div class="two-fourth last">';
+		$out .= sp_get_job_type( $post_id ); 
+		$out .= '<div class="closed-date"><span>Close Date</span>' . date("j M, Y", strtotime(get_post_meta( $post_id, 'sp_job_expire', true ))) . '</div>';
+		$out .= '</div>';
+		$out .= '</div> <!-- .one-third .last -->';
+		
+		$out .= '</article>';
+
+		return $out;
+	}
+}
+
+/**
+ * ----------------------------------------------------------------------------------------
+ * Render HTML Meta Slideshow in Home template
+ * ----------------------------------------------------------------------------------------
+ *
+ * @return 	string
+ *
+ */
+
+if ( ! function_exists( 'sp_get_job_type' ) ) {
+	function sp_get_job_type( $post_id ) {
+		$job_type = sp_get_term_name_by_id( get_post_meta( $post_id, 'sp_job_type', true ), 'sp_job_type' );
+		$job_class = str_replace(' ', '-', strtolower($job_type));
+
+		$out = '<div class="job-type ' . $job_class . '">';
+		$out .= $job_type;
+		$out .= '</div>';
+
+		return $out;
+	}
 }
 
 /**

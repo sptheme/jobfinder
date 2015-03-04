@@ -117,7 +117,7 @@
 
 	    	<?php while ( $related->have_posts() ) : $related->the_post(); ?>
 	    	
-	    	<?php get_template_part( 'templates/posts/job-item' ); ?>
+	    	<?php echo sp_job_item_html( get_the_ID() ); ?>
 
 	    	<?php endwhile; wp_reset_query(); ?>
 	    </section>
