@@ -36,6 +36,7 @@ function sp_add_shortcodes() {
 	add_shortcode( 'tabgroup', 'sp_tabgroup_shortcode' );
 	add_shortcode( 'tab', 'sp_tab_shortcode' );
 	add_shortcode( 'job', 'sp_job_sc' );
+	add_shortcode( 'partner', 'sp_partner_sc' );
 	
 }
 add_action( 'init', 'sp_add_shortcodes' );
@@ -238,6 +239,32 @@ function sp_job_sc( $atts, $content = null ) {
 	return $out;
 }
 
+function sp_partner_sc( $atts, $content = null ){
+
+	global $post;
+
+	extract( shortcode_atts( array(
+		'category_id' => null,
+		'post_num' => null,
+	), $atts ) );
+
+	
+	$args = array (
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'partner_category',
+				'field'    => 'id',
+				'terms'    => array($category_id),
+			)
+		),
+		'posts_per_page' => $post_num
+	);
+
+	$out = sp_get_partner_post( $args );
+
+	return $out;
+
+}
 
 
 

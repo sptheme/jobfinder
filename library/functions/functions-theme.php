@@ -577,11 +577,11 @@ if ( !function_exists('sp_get_post_job') ) {
 		$out = '';
 
 		if( $custom_query->have_posts() ) :
-			//$out .= '<div class="urgent-job">';
+			$out .= '<div class="urgent-job">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
 			 	$out .= sp_job_item_html( get_the_ID() );
 			endwhile; wp_reset_postdata();
-			//$out .= '</div>';
+			$out .= '</div>';
 		endif;
 
 		return $out;
@@ -651,6 +651,52 @@ if ( ! function_exists( 'sp_get_job_type' ) ) {
 
 		return $out;
 	}
+}
+
+/**
+ * ----------------------------------------------------------------------------------------
+ * Render Partner Post Type 
+ * ----------------------------------------------------------------------------------------
+ *
+ * @return 	string
+ *
+ */
+ 
+if ( !function_exists('sp_get_partner_post') ) {
+	function sp_get_partner_post( $args = array() ) {
+
+		$defaults = array(
+				'post_type' => 'sp_partner',
+				'posts_per_page' => -1
+			);
+		$args = wp_parse_args( $args, $defaults );
+		extract( $args );
+
+		$custom_query = new WP_Query($args);
+
+		if ( $custom_query->have_posts() ):
+			$out = '<div class="partner-post">';
+			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+				
+				$partner_url = get_post_meta( get_the_ID(), 'sp_partner_link', true );
+				$thumb_url = sp_post_thumbnail('medium');
+		        $image_url = aq_resize( $thumb_url, '132' );
+				
+				$out .= '<article id="post-' . get_the_ID() . '">';
+				if ( $partner_url ) {
+					$out .= '<a href="'.$partner_url.'" target="_blank"><img src="' . $image_url . '" /></a>';
+				} else {
+					$out .= '<img src="' . $image_url . '" />';
+				}
+				$out .= '</article>';
+
+			endwhile;
+			wp_reset_postdata();
+			$out .= '</div>';
+		endif;
+
+		return $out;
+	}	
 }
 
 /**

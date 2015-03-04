@@ -18,6 +18,8 @@ function sp_shortcodes_register_mce_button_3( $buttons ) {
 	array_push( $buttons, 'toggle' );
 	array_push( $buttons, 'tab' );
 	array_push( $buttons, 'job' );
+	array_push( $buttons, 'partner' );
+
 
     return $buttons;
 }
@@ -59,6 +61,7 @@ function sp_shortcodes_add_tinymce_plugin($plugin_array) {
 	$plugin_array['toggle']			= ED_JS_URL . 'ed-toggle.js';
 	$plugin_array['tab']			= ED_JS_URL . 'ed-tab.js';
 	$plugin_array['job']			= ED_JS_URL . 'ed-job.js';
+	$plugin_array['partner']		= ED_JS_URL . 'ed-partner.js';
 	
     return $plugin_array;
 }
@@ -78,8 +81,6 @@ function sp_shortcodes_add_mce_button() {
  }
 add_action( 'admin_head', 'sp_shortcodes_add_mce_button' );  
 
-/*load_template( SC_INC_DIR . 'popup/ajax-slider-shortcode.php' );
-load_template( SC_INC_DIR . 'popup/ajax-gallery-shortcode.php' );
-load_template( SC_INC_DIR . 'popup/ajax-team-shortcode.php' );*/
+load_template( SC_INC_DIR . 'popup/ajax-partner-shortcode.php' );
 
 ?>
