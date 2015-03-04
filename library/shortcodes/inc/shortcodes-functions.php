@@ -234,7 +234,27 @@ function sp_job_sc( $atts, $content = null ) {
 		'post_num' => null,		
 	), $atts));
 
-	$out = sp_get_post_job( $post_num );
+	$args = array(
+			'posts_per_page'		=> $post_num,
+			'meta_query' 			=> array(
+											'relation' => 'AND',
+											array(
+												'key'     => 'sp_is_urgent',
+												'value'   => 'on',
+												'compare' => '=',
+											),
+											array(
+												'key'     => 'sp_job_expire',
+												'value'   => date('Y-m-d'),
+												'type' 	  => 'DATE',
+												'compare' => '>',
+											),
+										),
+		);
+
+	$out = '<div class="sc-job">';
+	$out .= sp_get_post_job( $post_num, $args );
+	$out .= '</div>';
 
 	return $out;
 }

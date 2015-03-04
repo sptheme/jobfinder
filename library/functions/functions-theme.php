@@ -563,25 +563,25 @@ if ( !function_exists('sp_get_posttype_related') ) {
  */
 if ( !function_exists('sp_get_post_job') ) {
 
-	function sp_get_post_job( $post_num ) {
+	function sp_get_post_job( $post_num, $args ) {
 
-		$args = array(
+		$args = wp_parse_args($args,array(
 			'post_type'				=> 'sp_job',
-			'posts_per_page'		=> $post_num,
+			'posts_per_page'		=> -1,
 			'post_status'   		=> 'publish',
-			'meta_key'				=> 'sp_is_urgent',
-			'meta_value' 			=> 'on',
-		);
+			'orderby' 				=> 'meta_value_num',
+    		'order' 				=> 'ASC',
+		));
+		
 		$custom_query = new WP_Query($args);
 
 		$out = '';
 
 		if( $custom_query->have_posts() ) :
-			$out .= '<div class="urgent-job">';
+			
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
 			 	$out .= sp_job_item_html( get_the_ID() );
 			endwhile; wp_reset_postdata();
-			$out .= '</div>';
 		endif;
 
 		return $out;

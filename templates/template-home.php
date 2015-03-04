@@ -9,7 +9,8 @@ Template Name: Home
 		$home_meta  = get_post_meta( $post->ID ); ?>
 
 	<!-- Start Slideshow -->
-	<?php $meta_slides = explode( ',', get_post_meta( $post->ID, 'sp_page_gallery', true ) ); if ( !empty($meta_slides) ) : ?>
+	<?php $meta_slides = explode( ',', get_post_meta( $post->ID, 'sp_page_gallery', true ) ); ?> 
+	<?php if ( !empty($meta_slides[0]) ) : ?>
 	<div id="slideshow-section">
 		<div class="container clearfix">
 			<?php 

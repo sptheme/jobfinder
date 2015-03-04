@@ -99,30 +99,33 @@
 	    		$term_ids_join = join(', ', $term_ids);
 	    	endif;
 
-			$tax_query = array(
+	    	$args = array(
+	    		'post_type' => 'sp_job',
+				'tax_query' => array(
 							array(
 								'taxonomy' => 'sp_category',
 								'field'    => 'term_id',
 								'terms'    => array($term_ids_join),
 							)
-						);
+						),
+				'meta_query' 			=> array(
+											array(
+												'key'     => 'sp_job_expire',
+												'value'   => date('Y-m-d'),
+												'type' 	  => 'DATE',
+												'compare' => '>',
+											),
+										),
+				'orderby' 				=> 'meta_value_num',
+	    		'order' 				=> 'ASC'
+	    	);	
 
-			$related = sp_get_posttype_related( $post->ID , array( 'post_type' => 'sp_job', 'tax_query' => $tax_query ) ); 
 		?>
-	    
-	    <?php if ( $related->have_posts() ): ?>
 	    
 	    <section class="related-jobs">
 	    	<h4 class="heading">Related Jobs</h4>
-
-	    	<?php while ( $related->have_posts() ) : $related->the_post(); ?>
-	    	
-	    	<?php echo sp_job_item_html( get_the_ID() ); ?>
-
-	    	<?php endwhile; wp_reset_query(); ?>
+	    	<?php echo sp_get_post_job( 3, $args ); ?>
 	    </section>
-
-	    <?php endif; ?>
 
 	</div><!-- #main -->
 	<?php get_sidebar();?>
