@@ -19,7 +19,7 @@ function sp_category_init() {
 				'new_item_name' => __( 'Category', 'sptheme_admin' )
 			),
 			'sort' => true,
-			'rewrite' => array( 'slug' => 'category' )
+			'rewrite' => array( 'slug' => 'job-category' )
 		)
 	);
 }

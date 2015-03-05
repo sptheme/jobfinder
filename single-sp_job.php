@@ -57,8 +57,6 @@
 				?>
 				<div class="entry-content">
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', SP_TEXT_DOMAIN ) ); ?>
-
-					<center><a id="apply-job" href="#" class="button yellow">Apply for Job</a></center>
 				</div><!-- .entry-content -->
 		<?php
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -68,27 +66,10 @@
 			endwhile;	
 		?>
 
-		<div class="sharing">
-	        <span class="share-title">SHARE</span>
-	        <div class="default-sharing">
-	            <a class="sharing-buttons facebook" href="#">
-	                <div class="icon sprite-facebook"></div>
-	                <div class="but-text">
-	                    Facebook
-	                </div>
-	            </a>
-	            <a class="sharing-buttons twitter" href="#">
-	                <div class="icon sprite-twitter"></div>
-	                <div class="but-text">
-	                    Twitter
-	                </div>
-	            </a>
-	            <a class="sharing-buttons googleplus" href="#">
-	                <div class="icon sprite-googleplus"></div>
-	            </a>   
-	        </div>
-	    </div>
-
+		<center><a id="apply-job" href="#" class="button yellow">Apply for Job</a></center>
+		
+		<?php //get_template_part( 'templates/posts/sharing' ); ?>
+		
 	    <?php 
 	    	$terms = get_the_terms( $post->ID, 'sp_category');
 	    	if ( $terms && ! is_wp_error( $terms ) ) :
