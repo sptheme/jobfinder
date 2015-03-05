@@ -21,6 +21,8 @@ Template Name: Home
 	</div> <!-- #home-slider-section -->	
 	<?php endif; ?>	
 
+	<?php get_template_part( 'templates/posts/filter-job-form' ); ?>
+
 	<?php do_action( 'sp_start_content_wrap_html' ); ?>
 		<div class="main">
 	

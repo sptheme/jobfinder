@@ -92,6 +92,14 @@ function custom_theme_options() {
 		),
 		// General: Post Job Form
 		array(
+			'id'		=> 'filter-job',
+			'label'		=> 'Filter Job',
+			'desc'		=> 'Select result of filter job page',
+			'type'		=> 'page-select',
+			'section'	=> 'general'
+		),
+		// General: Post Job Form
+		array(
 			'id'		=> 'postjob-form',
 			'label'		=> 'Post Job Form',
 			'desc'		=> 'Select Post Job form page',
