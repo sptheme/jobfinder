@@ -82,6 +82,7 @@
 
 	    	$args = array(
 	    		'post_type' => 'sp_job',
+	    		'post__not_in' => array($post->ID),
 				'tax_query' => array(
 							array(
 								'taxonomy' => 'sp_category',
