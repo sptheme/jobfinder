@@ -92,11 +92,11 @@
 	    		'post_type' => 'sp_job',
 	    		'post__not_in' => array($post->ID),
 				'tax_query' => array(
-							array(
-								'taxonomy' => 'sp_category',
-								'field'    => 'term_id',
-								'terms'    => array($term_ids_join),
-							)
+										array(
+											'taxonomy' => 'sp_category',
+											'field'    => 'term_id',
+											'terms'    => array($term_ids_join),
+										)
 						),
 				'meta_query' 			=> array(
 											array(
@@ -111,15 +111,13 @@
 	    	);	
 
 	    	$related_job = sp_get_post_job( 3, $args );
-	    	echo $term_ids_join;
-
 		?>
 
 		<?php if ( $related_job ) : ?>
 	    
 	    <section class="related-jobs">
 	    	<h4 class="heading">Related Jobs</h4>
-	    	<?php echo sp_get_post_job( 3, $args ); ?>
+	    	<?php echo $related_job; ?>
 	    </section>
 
 		<?php endif; ?>
