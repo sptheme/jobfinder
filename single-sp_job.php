@@ -58,6 +58,14 @@
 				<div class="entry-content">
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', SP_TEXT_DOMAIN ) ); ?>
 				</div><!-- .entry-content -->
+
+				<div id="applyjob-form" class="mfp-hide white-popup-block job-form">
+				    <?php $page = get_post(ot_get_option('applyjob-form')); ?>
+				    <h3 class="heading"><?php echo $page->post_title; ?></h3>
+				    <?php $content = apply_filters('the_content', $page->post_content); 
+				    echo $content; ?>
+				</div> <!-- #postjob-form -->
+
 		<?php
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) {
@@ -66,7 +74,7 @@
 			endwhile;	
 		?>
 
-		<center><a id="apply-job" href="#" class="button yellow">Apply for Job</a></center>
+		<center><a id="apply-job" href="#applyjob-form" class="button yellow">Apply for Job</a></center>
 		
 		<?php //get_template_part( 'templates/posts/sharing' ); ?>
 		
@@ -102,12 +110,19 @@
 	    		'order' 				=> 'ASC'
 	    	);	
 
+	    	$related_job = sp_get_post_job( 3, $args );
+	    	echo $term_ids_join;
+
 		?>
+
+		<?php if ( $related_job ) : ?>
 	    
 	    <section class="related-jobs">
 	    	<h4 class="heading">Related Jobs</h4>
 	    	<?php echo sp_get_post_job( 3, $args ); ?>
 	    </section>
+
+		<?php endif; ?>
 
 	</div><!-- #main -->
 	<?php get_sidebar();?>

@@ -114,6 +114,14 @@ function custom_theme_options() {
 			'type'		=> 'page-select',
 			'section'	=> 'general'
 		),
+		// General: Apply Job Form
+		array(
+			'id'		=> 'applyjob-form',
+			'label'		=> 'Apply Job Form',
+			'desc'		=> 'Select apply job form page',
+			'type'		=> 'page-select',
+			'section'	=> 'general'
+		),
 		
 		// Blog: Excerpt Length
 		array(

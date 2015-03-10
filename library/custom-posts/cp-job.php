@@ -36,6 +36,9 @@
 		//CP list table columns
 		add_filter( 'manage_edit-sp_job_columns', 'sp_job_cp_columns' );
 
+		//CP columns as sortable
+		//add_filter( 'manage_edit-sp_job_sortable_columns', 'sp_job_manage_sortable_columns' );
+
 
 
 
@@ -106,17 +109,16 @@
 	if ( ! function_exists( 'sp_job_cp_columns' ) ) {
 		function sp_job_cp_columns( $columns ) {
 
-			//unset( $columns['date'] );
+			unset( $columns['date'] );
 			
 			$columns['cb']                   	= '<input type="checkbox" />';
 			$columns['title']                	= __( 'Title', 'sptheme_admin' );
-			$columns['date']                	= __( 'Posted Date', 'sptheme_admin' );
+			$columns['revealid_id'] 			= __( 'ID' );
 			$columns['job_category']            = __( 'Category', 'sptheme_admin' );
 			$columns['job_industry']            = __( 'Industry', 'sptheme_admin' );
 			$columns['job_type']            	= __( 'Type', 'sptheme_admin' );
 			$columns['job_location']            = __( 'Location', 'sptheme_admin' );
 			$columns['job_expire']		 		= __( 'Expire Date', 'sptheme_admin' );
-			
 
 			return $columns;
 		}
@@ -133,6 +135,10 @@
 
 			switch ( $column ) {
 				
+				case "revealid_id":
+					echo $post->ID; 
+					break;
+
 				case "job_category":
 					the_terms( $post->ID, 'sp_category' );
 					break;
@@ -159,6 +165,26 @@
 		}
 	} // /sp_job_cp_custom_column
 
+
+/*
+*****************************************************
+*      4) CUSTOM POST MANAGE SORTABLE COLUMN
+*****************************************************
+*/
+	/*
+	* Registration of the sortable columns
+	*
+	* $Cols = ARRAY [array of columns]
+	*/
+	/*if ( ! function_exists( 'sp_job_manage_sortable_columns' ) ) {
+		function sp_job_manage_sortable_columns( $sortable_columns ) {
+			
+			$sortable_columns[ 'revealid_id_column' ] = 'revealid_id';
+
+			return $sortable_columns;
+
+		}
+	}*/	
 
 	/*
 	* Custom function

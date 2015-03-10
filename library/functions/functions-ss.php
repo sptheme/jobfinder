@@ -107,7 +107,7 @@ if ( !function_exists('sp_print_custom_css_script') ){
 		        });
 		    });
 
-			$('#post-job, #upload-cv').magnificPopup({
+			$('#post-job, #upload-cv, #apply-job').magnificPopup({
 				type: 'inline',
 				preloader: false,
 				removalDelay: 500,
