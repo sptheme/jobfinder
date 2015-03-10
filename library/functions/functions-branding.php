@@ -13,7 +13,7 @@ function sp_custom_login_logo() {
 	$out .='<style type="text/css">';
 	$out .='body.login{ background-color:#ffffff; }';
 	if ( ot_get_option('custom-logo') ) {	
-	    $out .='.login h1 a { background-image:url('. ot_get_option('custom-logo') .') !important; height: 90px!important; width: 100%!important; background-size: auto!important;}';
+	    $out .='.login h1 a { background-image:url('. ot_get_option('custom-logo') .') !important; height: 105px!important; width: 100%!important; background-size: auto!important;}';
 	} else {
 		$out .='.login h1 a { background-image:url('. SP_BASE_URL .'/assets/images/logo.png) !important; height: 90px!important; width: 100%!important; background-size: auto!important;}';
 	}
@@ -24,7 +24,7 @@ function sp_custom_login_logo() {
 // Set favicons Admin
 add_action( 'admin_head', 'sp_adminfavicon' );
 function sp_adminfavicon() {
-	echo '<link rel="shortcut icon" type="image/x-icon" href="'.ot_get_option('favicon').'" />'."\n"; 	
+	echo '<link rel="shortcut icon" type="image/x-icon" href="'.ot_get_option('custom-favicon').'" />'."\n"; 	
 }
 
 // Remove wordpress link on admin login logo
@@ -57,7 +57,7 @@ if( !function_exists('sp_apple_touch_icon') )
 	function sp_apple_touch_icon() {
 
 		$out = '';
-		$favicon = ot_get_option('favicon');
+		$favicon = ot_get_option('custom-favicon');
 		$iphone_icon = ot_get_option('custom-iphone-icon57');
 		$ipad_icon = ot_get_option('custom-ipad-icon72');
 		$iphone_retina_icon = ot_get_option('custom-iphone-icon114');
