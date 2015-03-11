@@ -534,26 +534,45 @@ if ( ! function_exists( 'sp_get_term_name_by_id' ) ) {
 	}
 }
 
-/**
- * ----------------------------------------------------------------------------------------
- * Related post by taxonomy
- * ----------------------------------------------------------------------------------------
- */
-if ( !function_exists('sp_get_posttype_related') ) {
-
-	function sp_get_posttype_related($post_id, $args=array()) {
-
-		$args = wp_parse_args($args,array(
-		  'post__not_in' => array($post_id),
-		  'orderby' => 'rand',
-		  'posts_per_page' => -1,
-		  'post_status'    =>   'publish',
-		));
+/* ---------------------------------------------------------------------- */               							
+/*  Get post related by taxonomy
+/* ---------------------------------------------------------------------- */
+if ( !function_exists('sp_get_related_posts_by_taxonomy') ) {
+	function sp_get_related_posts_by_taxonomy( $post_id, $args=array(), $heading = 'Related Post' ) {
+		
+		$post = get_post($post_id);
+		$post_type = $post->post_type;
+		$taxonomy = get_object_taxonomies( $post_type );
+		$terms = wp_get_post_terms($post_id, $taxonomy[0], array("fields" => "ids"));
+		
+		$defaults = array(
+				'post_type' => $post_type, 
+				'post__not_in' => array($post_id),
+				'orderby' => 'rand',
+				'posts_per_page' => 3,
+				'tax_query' => array(
+		  			array(
+						'taxonomy' => $taxonomy[0],
+						'field' => 'term_id',
+		  				'terms' => $terms
+					))
+			);
+		$args = wp_parse_args( $args, $defaults );
+		extract( $args );
 		$custom_query = new WP_Query($args);
-
-		return $custom_query;
-	}
-
+		if ( $custom_query->have_posts() ):
+			$out = '<section class="related-posts sp-posts">';
+			$out .= '<h4 class="heading">' . $heading . '</h4>';
+			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+				$out .= sp_job_item_html( get_the_ID() );
+			endwhile;
+			$out .= '</section>';
+			wp_reset_postdata();
+		else :
+			$out = 'There is no related post.';
+		endif; 
+		return $out;
+	}	
 }
 
 /**

@@ -79,26 +79,8 @@
 		<?php //get_template_part( 'templates/posts/sharing' ); ?>
 		
 	    <?php 
-	    	$terms = get_the_terms( $post->ID, 'sp_category');
-	    	if ( $terms && ! is_wp_error( $terms ) ) :
-	    		$term_ids = array();
-	    		foreach ($terms as $term) {
-	    			$term_ids[] = $term->term_id;
-	    		}
-	    		$term_ids_join = join(', ', $term_ids);
-	    	endif;
-
 	    	$args = array(
-	    		'post_type' => 'sp_job',
-	    		'post__not_in' => array($post->ID),
-				'tax_query' => array(
-										array(
-											'taxonomy' => 'sp_category',
-											'field'    => 'term_id',
-											'terms'    => array($term_ids_join),
-										)
-						),
-				'meta_query' 			=> array(
+	    		'meta_query' 			=> array(
 											array(
 												'key'     => 'sp_job_expire',
 												'value'   => date('Y-m-d'),
@@ -110,18 +92,8 @@
 	    		'order' 				=> 'ASC'
 	    	);	
 
-	    	$related_job = sp_get_post_job( 3, $args );
+	    	echo sp_get_related_posts_by_taxonomy( $post->ID, $args, 'Related Jobs' );
 		?>
-
-		<?php if ( $related_job ) : ?>
-	    
-	    <section class="related-jobs">
-	    	<h4 class="heading">Related Jobs</h4>
-	    	<?php echo $related_job; ?>
-	    </section>
-
-		<?php endif; ?>
-
 	</div><!-- #main -->
 	<?php get_sidebar();?>
 	<?php do_action( 'sp_end_content_wrap_html' ); ?>
