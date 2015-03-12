@@ -28,7 +28,7 @@
 			<?php wp_dropdown_categories( $args ); ?>
 			<?php
 				$args = array(
-					'show_option_none' 	=> __( 'All Categories' ),
+					'show_option_none' 	=> __( 'All Locations' ),
 					'orderby'          	=> 'name',
 					'hide_empty'		=> 1,
 					'name'              => 'location',

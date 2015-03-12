@@ -40,11 +40,6 @@
 
     <header id="header">
         <div class="container clearfix">
-            <div class="menu-button">
-                <span class="border-before"></span>
-                <span class="border-main"></span>
-                <span class="border-after"></span>
-            </div> <!-- .menu-button -->
 
             <div class="brand" role="banner">
                 <?php if( !is_singular() ) echo '<h1>'; else echo '<h2>'; ?>
@@ -61,11 +56,21 @@
             </div><!-- end .brand -->
 
             <div class="upload-cv"><a href="#postcv-form" id="upload-cv" class="button yellow">Upload Resume</a></div>
+
+            <div class="menu-button">
+                <div class="border-wrap">
+                <span class="border-before"></span>
+                <span class="border-main"></span>
+                <span class="border-after"></span>
+                </div>
+                <div class="menu-title">Menu</div>
+            </div> <!-- .menu-button -->
+            
         </div><!-- .container .clearfix -->
 
         <nav id="primary-menu-container">
             <div class="container clearfix">
-            <?php echo sp_main_navigation(); ?>
+                <?php echo sp_main_navigation(); ?>
             </div>
         </nav><!-- .primary-nav .wrap -->
     </header><!-- end #header -->
