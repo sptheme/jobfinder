@@ -95,6 +95,33 @@ if ( ! function_exists( 'sp_excerpt_length' ) ) {
 
 /**
  * ----------------------------------------------------------------------------------------
+ * Facebook content sharing
+ * ----------------------------------------------------------------------------------------
+ */
+if ( ! function_exists( 'sp_facbook_content_sharing' ) ) {
+
+	add_filter( 'wp_head', 'sp_facbook_content_sharing', 1 );
+
+	function sp_facbook_content_sharing( $length ) {
+		global $post;
+		
+		// facebook sharing fix for videos, we add the custom meta data
+        if (has_post_thumbnail($post->ID)) {
+            $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+            if (!empty($image[0])) {
+                echo '<meta property="og:image" content="' .  $image[0] . '" />';
+            }
+        } else {
+        	echo '<meta property="og:image" content="' .  ot_get_option('custom-ipad-icon144') . '" />'; 
+        }
+	}
+	
+}
+
+
+
+/**
+ * ----------------------------------------------------------------------------------------
  * Start content wrap
  * ----------------------------------------------------------------------------------------
  */

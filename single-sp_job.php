@@ -66,6 +66,10 @@
 				    echo $content; ?>
 				</div> <!-- #postjob-form -->
 
+				<center><a id="apply-job" href="#applyjob-form" class="button yellow">Apply for Job</a></center>
+		
+				<?php get_template_part( 'templates/posts/sharing' ); ?>
+
 		<?php
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) {
@@ -73,10 +77,6 @@
 				}
 			endwhile;	
 		?>
-
-		<center><a id="apply-job" href="#applyjob-form" class="button yellow">Apply for Job</a></center>
-		
-		<?php //get_template_part( 'templates/posts/sharing' ); ?>
 		
 	    <?php 
 	    	$args = array(
