@@ -27,7 +27,8 @@
 <?php if ( ot_get_option('responsive') != 'off' ) : ?>
 	<aside id="sidemenu-container">
         <div id="sidemenu">
-        <nav class="menu-mobile-container">
+            <img class="logo-mobile" src="<?php echo ot_get_option('custom-logo'); ?>" alt="<?php echo esc_attr( get_bloginfo('name', 'display') ); ?>" />
+            <nav class="menu-mobile-container">
         <?php echo sp_mobile_navigation(); ?>
         </nav>
         </div>            	
