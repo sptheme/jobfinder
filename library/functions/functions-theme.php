@@ -781,7 +781,7 @@ if ( ! function_exists( 'sp_get_meta_slideshow' ) ) {
 	    foreach ($meta_slide as $image ) :  
 	        
 	        $images = sp_get_post_attachment( $image );
-	        $image_url = aq_resize( $images['src'], '940', '420', true);
+	        $image_url = aq_resize( $images['src'], '940', '380', true);
 
 	        $out .= '<li>';
 	        $out .= '<img src="' . $image_url . '">';
