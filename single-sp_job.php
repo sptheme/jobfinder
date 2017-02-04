@@ -88,8 +88,8 @@
 												'compare' => '>',
 											),
 										),
-				'orderby' 				=> 'meta_value_num',
-	    		'order' 				=> 'ASC'
+				'orderby' 				=> 'date',
+	    		'order' 				=> 'DESC'
 	    	);	
 
 	    	echo sp_get_related_posts_by_taxonomy( $post->ID, $args, 'Related Jobs' );

@@ -615,8 +615,8 @@ if ( !function_exists('sp_get_post_job') ) {
 			'post_type'				=> 'sp_job',
 			'posts_per_page'		=> -1,
 			'post_status'   		=> 'publish',
-			'orderby' 				=> 'meta_value_num',
-    		'order' 				=> 'ASC',
+			'orderby' 				=> 'date',
+    		'order' 				=> 'DESC',
 		));
 		
 		$custom_query = new WP_Query($args);
